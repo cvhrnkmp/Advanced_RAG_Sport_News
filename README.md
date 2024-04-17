@@ -12,7 +12,7 @@ Today's result shows the siginificant impact of pre-filtering by extracted entit
 
 ## Inference Process
 <p align="center">
-  <img src="https://github.com/cvhrnkmp/Advanced_RAG_Sport_News/assets/150841175/8f0a2156-c341-4a52-82d4-1e441b4dffb8", width="80%">
+  <img src="https://github.com/cvhrnkmp/Advanced_RAG_Sport_News/assets/150841175/8f0a2156-c341-4a52-82d4-1e441b4dffb8", width="100%">
 </p>
 
 
