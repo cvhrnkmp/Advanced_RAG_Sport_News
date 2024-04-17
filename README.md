@@ -12,8 +12,9 @@ Today's result shows the siginificant impact of pre-filtering by extracted entit
 
 ## Inference Process
 <p align="center">
-  <img src="https://github.com/vanny132/Datenanalyse_UN_RAG/assets/102876328/9da0f59c-4b31-4fec-8e5b-17b3f0631474", width="80%">
+  <img src="https://github.com/cvhrnkmp/Advanced_RAG_Sport_News/assets/150841175/8f0a2156-c341-4a52-82d4-1e441b4dffb8", width="80%">
 </p>
+
 
 ### Extract entities with NER model
 The motivation to extract entities is to filter the documents (articles) by entities. So it's possible to filter the documents by date, club, and season if the query contains them and this reduce the scope to a closed set of data. 
