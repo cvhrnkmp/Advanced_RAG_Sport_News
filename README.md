@@ -53,7 +53,7 @@ The Best Match 25 (BM25) is a ranking function, which often used in information 
 ```math
 \text{score}(d,q) = \epsilon \cdot \sum_{i=1}^{n} \text{IDF}(q_i) \cdot \frac{f(q_i, d) \cdot (k_1 + 1)}{f(q_i, d) + k_1 \cdot \left(1 - b + b \cdot \frac{l(d)}{\text{avg(l(D))}}\right)}
 ```
-There is an $\epsilon$ to prevent negative $IDF$ scores. For more information take look into the[BM25 implementation](https://github.com/dorianbrown/rank_bm25/blob/master/rank_bm25.py).
+There is an $\epsilon$ to prevent negative $IDF$ scores. For more information take look into the [BM25 implementation](https://github.com/dorianbrown/rank_bm25/blob/master/rank_bm25.py).
 $IDF$ is the inverse term-frequency of $q_i$. A less term-frequency results in a higher score. Thereby, the score is more less for words with a high frequnency like *the*, *and*, *or* and so on.
 $f(q_i, d)$ is the term frequency of the term in the document $d$.
 The constants $k_1$ and $b$ are set to $k1=1.5$ and $b=0.75$.
@@ -105,7 +105,7 @@ CR = \frac{Number\ of\ extracted\ sentences}{Total\ number\ of\ sentences\ in\ c
 ```
 <ins>Idea:</ins> The retrieved context should be focused and containing as little irrelevant information as possible. This is important, if long context passages are retrieved to the LLM. The score is between $0$ and $1$ and higher score is better.
 
-#### Additional Metrics developed by RAGAS
+### Additional Metrics developed by RAGAS
 - Context Recall
 - Context Precision
 - Context Relevancy
@@ -147,14 +147,15 @@ We investigated several aspects like the influence of different combined retriev
 ### Human Evaluation
 In the following plot, there is the mean score of each retrieving combinations scored by human. The plot shows, that the combination of time-weigthed and metadata retrieving is the best combination.
 <figure>
-  <img src="https://github.com/vanny132/Datenanalyse_UN_RAG/assets/102876328/61e8b292-f55a-4b18-82a6-2ecde7ce2b9a" alt="Mean score per retrieving combination">
+  <img src="https://github.com/cvhrnkmp/Advanced_RAG_Sport_News/assets/150841175/64579967-5228-4b53-acfe-73f7831e91b3" alt="Mean score per retrieving combination">
 </figure>
 
 The graphic also shows that the metadata ranking method combined with other ranking methods, achieves the highest scores. This is explained by the fact, that the metadata ranking method works with the extracted entities from the query and the documents are filtered by the entities before. The filtering by entities achieves the best result in human evaluation as also shown in the following graphic _Comparison of Llama-2-13b and Sauerkraut Mixtral 8x7B by Retrieving Methods and Scores_. The best results that excepted metadata ranking is time-weighted retrieving and the combination of time-weighted and similarity search. 
 
 The above plot presents, that the bahavior of the approach isn't match with the expected bahavior of the prompter. However, this depends on the query as the follwing graphic shows:
 
-![image](https://github.com/vanny132/Datenanalyse_UN_RAG/assets/102876328/d34a0665-d21a-4fb8-97da-28d5797d59ce)
+![image](https://github.com/cvhrnkmp/Advanced_RAG_Sport_News/assets/150841175/844e8a2e-896e-4f33-8ec8-e51fbd6aeed0)
+
 
 The plot shows the best result for the last three queries. That's because, that the NER model can extract the right values for the entities to search with them through the `news_keywords` in the dataset. That results in the good scores for the questions for the last three questions. To get a better understanding for the extraction process, please feel free to check the notebook _GLiNER/GLiNER_demo.ipynb_.
 
@@ -167,7 +168,32 @@ As conclusion for the human evaluation we can note the following points:
 - The right prompt to the model has also impact on the quality, because from a good prompt we can extract the right entities values to use it in the pre-filtering.
 - If it isn't possible to extract any entity value, than the similarity search reaches the best mean score.
 - Smaller chunks achieve a higher density of the expected behaviour
-  
+
+### RAGAS Evaluation Results
+In the following plot, there is the sum of `context_precision` and `context_recall` for each generation model. 
+<figure>
+  <img src="https://github.com/cvhrnkmp/Advanced_RAG_Sport_News/assets/150841175/5ddb7b05-6cbc-4360-aeea-8ed279f83897">
+</figure>
+The plot shows, that the summed results for each generation model is alomost the same. They differ about a value of three to eachother. This results out of failed computation of RAGAS, but this is acceptable.
+
+Further, the chunks-size has an impact on the `context_precision`. The best results in terms of `context_precision` shows the biggest chunk-strategie with 508 tokens and an overlap of 170 tokens.
+<figure>
+  <img src="https://github.com/cvhrnkmp/Advanced_RAG_Sport_News/assets/150841175/a71bbf87-d048-48a5-98b1-2c2cefde8bc2">
+</figure>
+Furthermore, chunks with a token length of 256 and an overlap of 85 shows the worst results. The `context_precision` of the chunk-strategy of 128 tokens and an overlap of 42 is in the middle. 
+
+The next plot shows the `context_precision` in terms of the retrieving combinations. From the graph it can be seen that time_weighted and metadata have a major influence on context_precision.
+<figure>
+  <img src="https://github.com/cvhrnkmp/Advanced_RAG_Sport_News/assets/150841175/81f28b52-e5f8-4099-a0fa-97adfe6d53fb">
+</figure>
+Furthermore, the combination of metadata, time-weighted and similarity search shows the best result for a combination, that includes the article's content. The BM25 keyword search shows the worst result, also in combination with time-weighted or metadata retrieving. Even the similarity search is better. All-in-all the plot shows, that there is potential of impovement, because the combinations only reaches 0.5 instead of a perfect result of 1.0, but this can also results out of the choice of queries.
+
+But in terms of `context_recall` the BM25 keyword search achieves the best results followed by the combination with similarity search and the similarity search alone, as the following plot shows.
+<figure>
+  <img src="https://github.com/cvhrnkmp/Advanced_RAG_Sport_News/assets/150841175/bfd060fb-c926-4ac9-99b5-055d9172177b">
+</figure>
+Noticeable in the graph is, that the best result in terms of the other metrics are in terms of the `context_recall` shows worst results. This is because that metadata and time-weighted retriever don't take the article's content into account. 
+
 # Dataset
 The dataset was crawled from www.reviersport.de and includes 59,938 articles. For each articles there are the following attributes crawled:
 - URL
