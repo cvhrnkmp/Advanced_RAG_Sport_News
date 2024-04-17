@@ -177,9 +177,9 @@ In the following plot, there is the sum of `context_precision` and `context_reca
 The plot shows, that the summed results for each generation model is alomost the same. They differ about a value of three to eachother. This results out of failed computation of RAGAS, but this is acceptable.
 
 Further, the chunks-size has an impact on the `context_precision`. The best results in terms of `context_precision` shows the biggest chunk-strategie with 508 tokens and an overlap of 170 tokens.
-<figure align = "center">
+<p align = "center">
   <img src="https://github.com/cvhrnkmp/Advanced_RAG_Sport_News/assets/150841175/a71bbf87-d048-48a5-98b1-2c2cefde8bc2", width="60%">
-</figure>
+</p>
 Furthermore, chunks with a token length of 256 and an overlap of 85 shows the worst results. The `context_precision` of the chunk-strategy of 128 tokens and an overlap of 42 is in the middle. 
 
 The next plot shows the `context_precision` in terms of the retrieving combinations. From the graph it can be seen that time_weighted and metadata have a major influence on context_precision.
