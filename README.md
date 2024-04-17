@@ -172,13 +172,13 @@ As conclusion for the human evaluation we can note the following points:
 ### RAGAS Evaluation Results
 In the following plot, there is the sum of `context_precision` and `context_recall` for each generation model. 
 <figure>
-  <img src="https://github.com/cvhrnkmp/Advanced_RAG_Sport_News/assets/150841175/5ddb7b05-6cbc-4360-aeea-8ed279f83897">
+  <img src="https://github.com/cvhrnkmp/Advanced_RAG_Sport_News/assets/150841175/5ddb7b05-6cbc-4360-aeea-8ed279f83897", width="60%">
 </figure>
 The plot shows, that the summed results for each generation model is alomost the same. They differ about a value of three to eachother. This results out of failed computation of RAGAS, but this is acceptable.
 
 Further, the chunks-size has an impact on the `context_precision`. The best results in terms of `context_precision` shows the biggest chunk-strategie with 508 tokens and an overlap of 170 tokens.
 <figure>
-  <img src="https://github.com/cvhrnkmp/Advanced_RAG_Sport_News/assets/150841175/a71bbf87-d048-48a5-98b1-2c2cefde8bc2">
+  <img src="https://github.com/cvhrnkmp/Advanced_RAG_Sport_News/assets/150841175/a71bbf87-d048-48a5-98b1-2c2cefde8bc2", width="60%">
 </figure>
 Furthermore, chunks with a token length of 256 and an overlap of 85 shows the worst results. The `context_precision` of the chunk-strategy of 128 tokens and an overlap of 42 is in the middle. 
 
